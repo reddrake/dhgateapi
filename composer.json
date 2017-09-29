@@ -1,0 +1,26 @@
+{
+	"name": "waimao/dhgateapi",
+	"type": "library",
+	"description": "Api for Dhgatecom",
+	"keywords": ["Dhgatecom"],
+	"homepage": "https://github.com/reddrake/dhgateapi",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "reddrake",
+			"email": "eagleftf123@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.5",
+		"guzzlehttp/guzzle": "^6.2"
+	},
+	"require-dev": {
+        "phpunit/phpunit": "4.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "DhgateApi\\": "src/"
+        }
+    }
+}
