@@ -27,8 +27,7 @@ class Request implements RequestInterface{
 
     public function perform(OperationInterface $operation)
     {
-        //$uri = sprintf($this->requestScheme, $operation->getName()). '/' . $this->config->getApiKey();
-        $uri=$this->requestScheme;
+        $uri = $this->requestScheme;
         $data = $this->authSignature($operation);
         $return = $this->curlExec($uri, $data);
         if(@$return['error_code'] == '40' || @$return['message'] == '令牌Access Token过期或不存在'){
@@ -66,28 +65,19 @@ class Request implements RequestInterface{
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             return json_decode($e->getResponse()->getBody(),true);
         }
-
     }
 
     protected function authSignature( $operation ){
         $code_arr = $operation->getOperationParameter();
         $code_arr['client_id'] = $this->config->getApiKey();
+        $code_arr['method'] = $operation->getName();
         $code_arr['access_token'] = $this->config->getAccessToken();
-        /*$code_arr['method'] = 'dh.products.get';
-        $code_arr['v'] = '1.0';*/
+
         list($msec, $sec) = explode(' ', microtime());
         $msectime =  (float)sprintf('%.0f', (floatval($msec) + floatval($sec)) * 1000);
-        $code_arr['timestamp'] =$msectime;
-       // $code_arr['_aop_datePattern'] = 'yyyy-MM-dd HH:mm:ss';
-        ksort($code_arr);
-       /* $sign_str = $url = '';
-        foreach ($code_arr as $key=>$val){
-            if(!$val) continue;
-            $sign_str .= $key . $val;
-        }
-        $sign_str = 'param2/1/aliexpress.open/' . $operation->getName() . '/' . $this->config->getApiKey() . $sign_str;
+        $code_arr['timestamp'] = $msectime;
 
-        $code_arr['_aop_signature'] = strtoupper(bin2hex(hash_hmac("sha1", $sign_str, $this->config->getApiSecret(), true)));*/
+        ksort($code_arr);
 
         return $code_arr;
     }    
