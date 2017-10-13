@@ -3,19 +3,13 @@ namespace DhgateApi\Operations;
 
 class ProductGroupList extends AbstractOperation
 {
+    public function __contrsuct()
+    {
+        $this->parameter['v'] = '2.0';
+    }
     public function getName()
     {
-        return 'api.getProductGroupList';
-    }
-
-    public function setMethod($method)
-    {
-        $this->parameter['method'] = $method;
-        return $this;
-    }
-
-    public function setV($v){
-        $this->parameter['v'] = $v;
+        return 'dh.item.group.list';
     }
 
     public function setContainChildGroup($containChildGroup){

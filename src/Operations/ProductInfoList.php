@@ -3,9 +3,14 @@ namespace DhgateApi\Operations;
 
 class ProductInfoList extends AbstractOperation
 {
+    public function __construct()
+    {
+        $this->parameter['v'] = '1.0';
+    }
+    
     public function getName()
     {
-        return 'api.findProductInfoListQuery';
+        return 'dh.products.get';
     }
 
     public function setPages($pages)
@@ -30,16 +35,5 @@ class ProductInfoList extends AbstractOperation
     {
         $this->parameter['siteId'] = $siteId;
         return $this;
-    }
-
-
-    public function setMethod($method)
-    {
-        $this->parameter['method'] = $method;
-        return $this;
-    }
-
-    public function setV($v){
-        $this->parameter['v'] = $v;
     }
 }
