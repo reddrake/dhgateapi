@@ -5,12 +5,18 @@ class ProductInfoList extends AbstractOperation
 {
     public function __construct()
     {
-        $this->parameter['v'] = '1.0';
+        $this->parameter['v'] = '2.0';
     }
-    
+
     public function getName()
     {
-        return 'dh.products.get';
+        return 'dh.item.list';
+    }
+
+    public function setOperateDateStart($operateDateStart)
+    {
+        $this->parameter['operateDateStart'] = $operateDateStart;
+        return $this;
     }
 
     public function setPages($pages)
@@ -19,15 +25,15 @@ class ProductInfoList extends AbstractOperation
         return $this;
     }
 
-    public function setPagesize($pagesize)
+    public function setPageSize($pageSize)
     {
-        $this->parameter['pagesize'] = $pagesize;
+        $this->parameter['pageSize'] = $pageSize;
         return $this;
     }
 
-    public function setProductQueryVo($productQueryVo)
+    public function setState($state)
     {
-        $this->parameter['productQueryVo'] = $productQueryVo;
+        $this->parameter['state'] = $state;
         return $this;
     }
 

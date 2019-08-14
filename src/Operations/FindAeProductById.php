@@ -5,17 +5,24 @@ class FindAeProductById extends AbstractOperation
 {
     public function __construct()
     {
-        $this->parameter['v'] = '1.1';
+        $this->parameter['v'] = '2.0';
     }
 
     public function getName()
     {
-        return 'dh.product.get';
+        return 'dh.item.get';
     }
 
-    public function setItemcode($itemcode)
+    public function setItemCode($itemCode)
     {
-        $this->parameter['itemcode'] = $itemcode;
+        $this->parameter['itemCode'] = $itemCode;
         return $this;
     }
+
+    public function setSiteId($siteId)
+    {
+        $this->parameter['siteId'] = $siteId;
+        return $this;
+    }
+
 }
